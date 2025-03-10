@@ -9,3 +9,11 @@ BEGIN
     RETURN v_total_reward;
 END;
 /
+
+DECLARE
+ v_res VARCHAR2(200);
+BEGIN
+    v_res := calculate_total_reward(100, 20);
+    DBMS_OUTPUT.PUT_LINE('Результат: ' || v_res);
+END;
+/

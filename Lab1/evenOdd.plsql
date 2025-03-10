@@ -14,3 +14,12 @@ BEGIN
     END IF;
 END;
 /
+
+
+DECLARE
+ v_res VARCHAR2(20);
+BEGIN
+    v_res := check_even_odd_count();
+    DBMS_OUTPUT.PUT_LINE('Результат: ' || v_res);
+END;
+/

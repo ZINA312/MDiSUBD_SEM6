@@ -8,7 +8,6 @@ CREATE OR REPLACE TRIGGER trg_groups_before
 BEFORE INSERT OR UPDATE ON GROUPS
 FOR EACH ROW
 BEGIN
-    -- Сохраняем новое значение имени в коллекции
     pkg_groups_validation.g_names(pkg_groups_validation.g_names.COUNT + 1) := :NEW.NAME;
 END;
 /
@@ -18,7 +17,6 @@ AFTER INSERT OR UPDATE ON GROUPS
 DECLARE
     v_count NUMBER;
 BEGIN
-    -- Проверяем уникальность имен из коллекции
     FOR i IN 1 .. pkg_groups_validation.g_names.COUNT LOOP
         SELECT COUNT(*)
         INTO v_count
@@ -26,12 +24,10 @@ BEGIN
         WHERE NAME = pkg_groups_validation.g_names(i);
 
         IF v_count > 1 THEN
-            -- Если найдено больше одной записи с таким именем, выбрасываем ошибку
             RAISE_APPLICATION_ERROR(-20001, 'Имя должно быть уникальным: ' || pkg_groups_validation.g_names(i));
         END IF;
     END LOOP;
 
-    -- Очищаем коллекцию
     pkg_groups_validation.g_names.DELETE;
 END;
 /

@@ -19,6 +19,6 @@ DELETE FROM STUDENTS;
 DELETE FROM STUDENTS_LOG;
 
 BEGIN
-    restore_students(p_offset => INTERVAL '1' MINUTE);
+    restore_students(p_offset => INTERVAL '30' SECOND);
 END;
 /

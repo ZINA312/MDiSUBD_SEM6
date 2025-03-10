@@ -11,3 +11,11 @@ EXCEPTION
         RETURN 'No record found for ID: ' || p_id;
 END;
 /
+
+DECLARE
+ v_res VARCHAR2(200);
+BEGIN
+    v_res := generate_insert_command(-5);
+    DBMS_OUTPUT.PUT_LINE('Результат: ' || v_res);
+END;
+/

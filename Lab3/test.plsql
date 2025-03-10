@@ -1,0 +1,6 @@
+
+BEGIN
+    GENERATE_SYNC_SCRIPT('DEVELOPER', 'PRODUCTION');
+    compare_schemas('DEVELOPER', 'PRODUCTION');
+END;
+/
